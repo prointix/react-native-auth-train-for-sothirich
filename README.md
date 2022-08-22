@@ -1,4 +1,4 @@
-# Todo App
+# Authentication with React Native
 
 **Note:** Fork this repo to your profile. Before coding create branch by feature for easy pull request and review when you done one task.
 
