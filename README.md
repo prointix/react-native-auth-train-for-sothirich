@@ -50,9 +50,13 @@ yarn ios
     - auth.jsx
   - screens
     - SignIn
+      - index.jsx
     - SignUp
+      - index.jsx
     - Home
+      - index.jsx
   - services
+    - auth.js
   - index.jsx
 - index.js
 # //---
