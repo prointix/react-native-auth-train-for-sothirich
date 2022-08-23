@@ -47,6 +47,7 @@ yarn ios
   - hooks
   - routes
     - index.jsx
+    - app.jsx
     - auth.jsx
   - screens
     - SignIn
