@@ -8,7 +8,6 @@ import {SubmitButton} from '../../components/SubmitButton';
 import {COLORS} from '../../theme/Color';
 
 const SignIn = ({navigation}) => {
-  const [nameInput, setNameInput] = useState('');
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
