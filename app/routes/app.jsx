@@ -3,21 +3,19 @@ import {
   createStackNavigator,
   CardStyleInterpolators,
 } from '@react-navigation/stack';
-import SignUp from '../screens/SignUp';
-import SignIn from '../screens/SignIn';
+import Home from '../screens/Home';
 const Stack = createStackNavigator();
 
-const AuthRoute = () => {
+const AppRoute = () => {
   return (
     <Stack.Navigator
       screenOptions={{
         header: () => null,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
+      <Stack.Screen name="Home" component={Home} />
     </Stack.Navigator>
   );
 };
 
-export default AuthRoute;
+export default AppRoute;

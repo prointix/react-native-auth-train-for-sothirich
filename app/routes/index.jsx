@@ -3,9 +3,8 @@ import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
-import SignUp from '../screens/SignUp';
-import SignIn from '../screens/SignIn';
-import Home from '../screens/Home';
+import AppRoute from './app';
+import AuthRoute from './auth';
 
 const Stack = createStackNavigator();
 
@@ -16,9 +15,8 @@ const Routes = () => {
         header: () => null,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="SignIn" component={SignIn} />
-      <Stack.Screen name="SignUp" component={SignUp} />
-      <Stack.Screen name="Home" component={Home} />
+      <Stack.Screen name="Auth" component={AuthRoute} />
+      <Stack.Screen name="App" component={AppRoute} />
     </Stack.Navigator>
   );
 };
