@@ -10,7 +10,7 @@ const AppRoute = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        header: () => null,
+        headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
       <Stack.Screen name="Home" component={Home} />
