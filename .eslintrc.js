@@ -10,4 +10,5 @@ module.exports = {
   rules: {
     'prettier/prettier': 0,
   },
+  parser: '@babel/eslint-parser',
 };
