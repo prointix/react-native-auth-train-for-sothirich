@@ -1,6 +1,5 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
 import {Body} from '../../components/Body';
 import {Header} from '../../components/Header';
 import {SubmitButton} from '../../components/SubmitButton';
@@ -8,14 +7,11 @@ import {useAuth} from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 
 const Home = ({navigation}) => {
-  const {logout, isLoading, userInfo} = useAuth();
-
-  const userName = userInfo.user?.name;
+  const {logout, user} = useAuth();
 
   return (
     <SafeAreaView style={styles.container}>
-      <Spinner visible={isLoading} />
-      <Header label={`Welcome ${userName}`} />
+      <Header label={`Welcome ${user?.name}`} />
       <Body>
         <View style={styles.bottomTextContainer}>
           <Text style={styles.normalText}>Nothing to see yet</Text>
