@@ -1,17 +1,17 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {
   CardStyleInterpolators,
   createStackNavigator,
 } from '@react-navigation/stack';
 import AppRoute from './app';
 import AuthRoute from './auth';
-import {AuthContext} from '../contexts/auth';
+import {useAuth} from '../contexts/auth';
 import Splash from '../screens/Splash';
 
 const Stack = createStackNavigator();
 
 const Routes = () => {
-  const {userInfo, splashLoading} = useContext(AuthContext);
+  const {userInfo, splashLoading} = useAuth();
 
   return (
     <Stack.Navigator

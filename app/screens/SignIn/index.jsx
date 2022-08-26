@@ -1,11 +1,11 @@
-import React, {useState, useContext, createRef} from 'react';
+import React, {useState, createRef} from 'react';
 import {Keyboard, SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Body} from '../../components/Body';
 import {FloatingLabelInput} from '../../components/FloatingLabelInput';
 import {Header} from '../../components/Header';
 import {SubmitButton} from '../../components/SubmitButton';
-import {AuthContext} from '../../contexts/auth';
+import { useAuth } from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 
 const SignIn = ({navigation}) => {
@@ -15,7 +15,7 @@ const SignIn = ({navigation}) => {
   const emailRef = createRef();
   const passwordRef = createRef();
 
-  const {login, isLoading} = useContext(AuthContext);
+  const {login, isLoading} = useAuth();
 
   const onLoginPressHandler = () => {
     let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;

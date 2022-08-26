@@ -1,14 +1,14 @@
-import React, {useContext, useState} from 'react';
+import React from 'react';
 import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Body} from '../../components/Body';
 import {Header} from '../../components/Header';
 import {SubmitButton} from '../../components/SubmitButton';
-import {AuthContext} from '../../contexts/auth';
+import {useAuth} from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 
 const Home = ({navigation}) => {
-  const {logout, isLoading, userInfo} = useContext(AuthContext);
+  const {logout, isLoading, userInfo} = useAuth;
 
   const userName = userInfo.user?.name;
 
