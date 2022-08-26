@@ -1,40 +1,41 @@
-const BASE_URL = 'https://blogserver.fly.dev/auth';
+import api from './api';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
-export const addUser = async (name, email, password) => {
-  try {
-    const req = {
-      method: 'post',
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
-      body: JSON.stringify({
-        name: name,
-        email: email,
-        password: password,
-      }),
-    };
+export const currentUser = async () => {
+  const accessToken = await AsyncStorage.getItem('token');
+  const headers = {
+    Authorization: `Bearer ${accessToken}`,
+  };
 
-    const response = await fetch(`${BASE_URL}/register`, req);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+  return api.get('/auth/me', {headers}).then(res => res.data);
 };
 
-export const loginUser = async (email, password) => {
-  try {
-    const req = {
-      method: 'post',
-      headers: {'Content-Type': 'application/json; charset=utf-8'},
-      body: JSON.stringify({
-        email: email,
-        password: password,
-      }),
-    };
+/**
+ * @param {string} name
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<{accessToken: string, user: any}>}
+ */
+export const addUser = async (name, email, password) => {
+  return api
+    .post('/auth/register', {
+      name: name,
+      email: email,
+      password: password,
+    })
+    .then(res => res.data);
+};
 
-    const response = await fetch(`${BASE_URL}/login`, req);
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.log(error);
-  }
+/**
+ * @param {string} email
+ * @param {string} password
+ * @returns {Promise<{accessToken: string, user: any}>}
+ */
+export const loginUser = async (email, password) => {
+  return api
+    .post('/auth/login', {
+      email: email,
+      password: password,
+    })
+    .then(res => res.data);
 };
