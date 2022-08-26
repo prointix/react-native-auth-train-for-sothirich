@@ -8,7 +8,7 @@ import {useAuth} from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 
 const Home = ({navigation}) => {
-  const {logout, isLoading, userInfo} = useAuth;
+  const {logout, isLoading, userInfo} = useAuth();
 
   const userName = userInfo.user?.name;
 

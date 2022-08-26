@@ -1,11 +1,18 @@
 import React, {useState, createRef} from 'react';
-import {Keyboard, SafeAreaView, StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import {
+  Keyboard,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+} from 'react-native';
 import Spinner from 'react-native-loading-spinner-overlay';
 import {Body} from '../../components/Body';
 import {FloatingLabelInput} from '../../components/FloatingLabelInput';
 import {Header} from '../../components/Header';
 import {SubmitButton} from '../../components/SubmitButton';
-import { useAuth } from '../../contexts/auth';
+import {useAuth} from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 
 const SignIn = ({navigation}) => {
