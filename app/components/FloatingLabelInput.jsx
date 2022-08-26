@@ -1,8 +1,8 @@
-import React, {useState} from 'react';
+import React, {forwardRef, useState} from 'react';
 import {StyleSheet, Text, View, TextInput} from 'react-native';
 import {COLORS} from '../theme/Color';
 
-export const FloatingLabelInput = props => {
+export const FloatingLabelInput = forwardRef((props, ref) => {
   const [isFocused, setIsFocused] = useState(false);
   const [errorLabel, setErrorLabel] = useState('');
 
@@ -25,7 +25,23 @@ export const FloatingLabelInput = props => {
       setErrorLabel(`*${props.label} is required*`);
     } else {
       setIsFocused(true);
-      setErrorLabel('');
+
+      if (props.type === 'email') {
+        let reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (reg.test(props.value) === false) {
+          setErrorLabel('*Email is invalid*');
+        } else {
+          setErrorLabel('');
+        }
+      } else if (props.type === 'password') {
+        if (props.value.trim().length < 6) {
+          setErrorLabel('*Password must be longer than 5 characters*');
+        } else {
+          setErrorLabel('');
+        }
+      } else {
+        setErrorLabel('');
+      }
     }
   };
 
@@ -34,6 +50,7 @@ export const FloatingLabelInput = props => {
       <Text style={labelStyle}>{props.label}</Text>
       <TextInput
         {...props}
+        ref={ref}
         style={styles.textInput}
         onFocus={focusHandler}
         onEndEditing={endFocusHandler}
@@ -42,7 +59,7 @@ export const FloatingLabelInput = props => {
       <Text style={styles.errLabel}>{errorLabel}</Text>
     </View>
   );
-};
+});
 
 const styles = StyleSheet.create({
   textInputContainer: {
