@@ -2,13 +2,13 @@ import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {COLORS} from '../../theme/Color';
 
-export const ListArticle = ({article}) => {
+export const ListArticle = props => {
   return (
-    <View style={styles.listContainer}>
+    <TouchableOpacity style={styles.listContainer} {...props}>
       <View>
-        <Text style={styles.bigText}>{article.title}</Text>
+        <Text style={styles.bigText}>{props.article.title}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 

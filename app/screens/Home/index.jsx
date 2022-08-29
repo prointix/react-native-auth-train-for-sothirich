@@ -1,14 +1,31 @@
-import React from 'react';
-import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import React, {useState} from 'react';
+import {
+  FlatList,
+  RefreshControl,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {Body} from '../../components/Body';
 import {Header} from '../../components/Header';
-import {SubmitButton} from '../../components/SubmitButton';
 import {useAuth} from '../../contexts/auth';
 import {COLORS} from '../../theme/Color';
 import {ListArticle} from './ListArticle';
 
 const Home = ({navigation}) => {
-  const {logout, user, article} = useAuth();
+  const {user, article} = useAuth();
+  const [refreshing, setRefreshing] = useState(false);
+
+  const onPressHandler = item => {
+    navigation.navigate('ArticleDetail', {item});
+  };
+
+  const onRefresh = () => {
+    setRefreshing(true);
+    setRefreshing(false);
+  };
 
   return (
     <SafeAreaView style={styles.container}>
@@ -17,7 +34,15 @@ const Home = ({navigation}) => {
         <View style={{flex: 1}}>
           <FlatList
             data={article.data}
-            renderItem={({item}) => <ListArticle article={item} />}
+            renderItem={({item}) => (
+              <ListArticle
+                article={item}
+                onPress={() => onPressHandler(item)}
+              />
+            )}
+            refreshControl={
+              <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
+            }
           />
         </View>
       </Body>

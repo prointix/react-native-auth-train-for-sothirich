@@ -28,6 +28,12 @@ export const AuthProvider = props => {
     setUser(null);
   };
 
+  const getArticles = () => {
+    getAllArticles().then(data => {
+      setArticle(data);
+    });
+  };
+
   useEffect(() => {
     setIsLoading(true);
     currentUser()
@@ -36,9 +42,7 @@ export const AuthProvider = props => {
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
-    getAllArticles().then(data => {
-      setArticle(data);
-    });
+    getArticles();
   }, []);
 
   return (

@@ -8,6 +8,7 @@ import Ionicons from 'react-native-vector-icons/Ionicons';
 import SignOut from '../screens/SignOut';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {COLORS} from '../theme/Color';
+import ArticleDetail from '../screens/Home/ArticleDetail';
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -15,15 +16,32 @@ export default AppRoute = () => {
   return (
     <Stack.Navigator
       screenOptions={{
-        headerShown: false,
         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
       }}>
-      <Stack.Screen name="AppTab" component={AppTab} />
+      <Stack.Screen
+        name="AppTab"
+        component={AppTab}
+        options={{headerShown: false}}
+      />
+      <Stack.Screen
+        name="ArticleDetail"
+        component={ArticleDetail}
+        options={({route}) => ({
+          title: route.params.item.title,
+          headerStyle: {
+            backgroundColor: COLORS.primary,
+            height: 70,
+          },
+          headerTitleStyle: {
+            fontSize: 25,
+          },
+        })}
+      />
     </Stack.Navigator>
   );
 };
-
-export const AppTab = () => {
+//  navigation.setOptions({title: `${item.title}`});
+const AppTab = () => {
   return (
     <Tab.Navigator
       screenOptions={({route}) => ({
@@ -39,13 +57,42 @@ export const AppTab = () => {
           // You can return any component that you like here!
           return <Ionicons name={iconName} size={size} color={color} />;
         },
-        tabBarActiveTintColor: COLORS.primary,
+        tabBarActiveTintColor: '#00BC22',
         tabBarInactiveTintColor: COLORS.black,
-        tabBarLabelStyle: {paddingBottom: 3},
+        tabBarLabelStyle: {paddingBottom: 5},
+        tabBarStyle: {backgroundColor: COLORS.primary, height: 60, padding: 10},
         headerShown: false,
       })}>
-      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Home" component={Home} options={{headerShown: false}} />
       <Tab.Screen name="Settings" component={SignOut} />
     </Tab.Navigator>
   );
 };
+
+// const HomeRoute = () => {
+//   return (
+//     <Stack.Navigator
+//       screenOptions={{
+//         cardStyleInterpolator: CardStyleInterpolators.forHorizontalIOS,
+//       }}>
+//       <Stack.Screen
+//         name="ArticleHome"
+//         component={Home}
+//         options={{headerShown: false}}
+//       />
+//       <Stack.Screen
+//         name="ArticleDetail"
+//         component={ArticleDetail}
+//         options={{
+//           headerStyle: {
+//             backgroundColor: COLORS.primary,
+//             height: 70,
+//           },
+//           headerTitleStyle: {
+//             fontSize: 25,
+//           },
+//         }}
+//       />
+//     </Stack.Navigator>
+//   );
+// };
