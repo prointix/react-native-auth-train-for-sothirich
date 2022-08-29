@@ -7,7 +7,6 @@ export const ListArticle = ({article}) => {
     <View style={styles.listContainer}>
       <View>
         <Text style={styles.bigText}>{article.title}</Text>
-        <Text style={styles.smallText}>{article.body}</Text>
       </View>
     </View>
   );
@@ -24,11 +23,6 @@ const styles = StyleSheet.create({
   bigText: {
     fontWeight: 'bold',
     fontSize: 25,
-    color: 'black',
-  },
-  smallText: {
-    fontWeight: 'bold',
-    fontSize: 15,
     color: 'black',
   },
 });
