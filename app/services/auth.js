@@ -16,7 +16,7 @@ export const currentUser = async () => {
  * @param {string} password
  * @returns {Promise<{accessToken: string, user: any}>}
  */
-export const addUser = async (name, email, password) => {
+export const addUser = (name, email, password) => {
   return api
     .post('/auth/register', {
       name: name,
@@ -31,11 +31,15 @@ export const addUser = async (name, email, password) => {
  * @param {string} password
  * @returns {Promise<{accessToken: string, user: any}>}
  */
-export const loginUser = async (email, password) => {
+export const loginUser = (email, password) => {
   return api
     .post('/auth/login', {
       email: email,
       password: password,
     })
     .then(res => res.data);
+};
+
+export const getAllArticles = () => {
+  return api.get('/articles').then(res => res.data);
 };
