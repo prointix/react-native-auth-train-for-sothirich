@@ -43,3 +43,7 @@ export const loginUser = (email, password) => {
 export const getAllArticles = () => {
   return api.get('/articles').then(res => res.data);
 };
+
+export const getArticleDetails = id => {
+  return api.get(`/articles/${id}`).then(res => res.data);
+};
