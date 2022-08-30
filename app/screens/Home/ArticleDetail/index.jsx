@@ -1,21 +1,28 @@
 import moment from 'moment';
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {SafeAreaView, StyleSheet, View, Text, ScrollView} from 'react-native';
+import {getArticleDetails} from '../../../services/auth';
 import {COLORS} from '../../../theme/Color';
 
 const ArticleDetail = ({navigation, route}) => {
-  const {item} = route.params;
-  // navigation.setOptions({title: `${item.title}`});
+  const {itemId} = route.params;
+  const [article, setArticle] = useState({});
+
+  useEffect(() => {
+    getArticleDetails(itemId)
+      .then(data => {
+        setArticle(data);
+      })
+      .catch();
+  }, []);
 
   return (
     <ScrollView style={{backgroundColor: '#fff'}}>
       <SafeAreaView style={styles.container}>
         <View>
-          <Text style={styles.headerText}>{item.title}</Text>
-          <Text style={styles.time}>
-            {moment(item.createdAt).format('llll')}
-          </Text>
-          <Text style={styles.text}>{item.body}</Text>
+          <Text style={styles.headerText}>{article.title}</Text>
+          <Text style={styles.time}>{moment(article.createdAt).format('llll')}</Text>
+          <Text style={styles.text}>{article.body}</Text>
         </View>
       </SafeAreaView>
     </ScrollView>

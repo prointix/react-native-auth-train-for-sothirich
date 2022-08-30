@@ -26,8 +26,8 @@ export default AppRoute = () => {
       <Stack.Screen
         name="ArticleDetail"
         component={ArticleDetail}
-        options={({route}) => ({
-          title: route.params.item.title,
+        options={{
+          title: 'Detail',
           headerStyle: {
             backgroundColor: COLORS.primary,
             height: 70,
@@ -35,7 +35,7 @@ export default AppRoute = () => {
           headerTitleStyle: {
             fontSize: 25,
           },
-        })}
+        }}
       />
     </Stack.Navigator>
   );

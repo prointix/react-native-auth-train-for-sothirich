@@ -1,25 +1,31 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   FlatList,
   RefreshControl,
   SafeAreaView,
   StyleSheet,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {Body} from '../../components/Body';
 import {Header} from '../../components/Header';
 import {useAuth} from '../../contexts/auth';
+import {getAllArticles} from '../../services/auth';
 import {COLORS} from '../../theme/Color';
 import {ListArticle} from './ListArticle';
 
 const Home = ({navigation}) => {
-  const {user, article} = useAuth();
+  const {user} = useAuth();
   const [refreshing, setRefreshing] = useState(false);
+  const [article, setArticle] = useState({});
 
-  const onPressHandler = item => {
-    navigation.navigate('ArticleDetail', {item});
+  useEffect(() => {
+    getAllArticles().then(data => {
+      setArticle(data);
+    });
+  }, []);
+
+  const onPressHandler = itemId => {
+    navigation.navigate('ArticleDetail', {itemId});
   };
 
   const onRefresh = () => {
@@ -37,7 +43,7 @@ const Home = ({navigation}) => {
             renderItem={({item}) => (
               <ListArticle
                 article={item}
-                onPress={() => onPressHandler(item)}
+                onPress={() => onPressHandler(item.id)}
               />
             )}
             refreshControl={

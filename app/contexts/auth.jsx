@@ -1,6 +1,6 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import React, {createContext, useState, useEffect, useContext} from 'react';
-import {currentUser, getAllArticles} from '../services/auth';
+import {currentUser} from '../services/auth';
 import api from '../services/api';
 
 export const AuthContext = createContext();
@@ -14,7 +14,6 @@ export const useAuth = () => useContext(AuthContext);
 export const AuthProvider = props => {
   const [user, setUser] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const [article, setArticle] = useState([]);
 
   const login = async (accessToken, resUser) => {
     await AsyncStorage.setItem('token', accessToken);
@@ -28,12 +27,6 @@ export const AuthProvider = props => {
     setUser(null);
   };
 
-  const getArticles = () => {
-    getAllArticles().then(data => {
-      setArticle(data);
-    });
-  };
-
   useEffect(() => {
     setIsLoading(true);
     currentUser()
@@ -42,12 +35,11 @@ export const AuthProvider = props => {
         setIsLoading(false);
       })
       .catch(() => setIsLoading(false));
-    getArticles();
   }, []);
 
   return (
     <AuthContext.Provider
-      value={{user, signed: !!user, isLoading, login, logout, article}}>
+      value={{user, signed: !!user, isLoading, login, logout}}>
       {props.children}
     </AuthContext.Provider>
   );

@@ -1,4 +1,4 @@
-import React, {useState, createRef} from 'react';
+import React, {useState, useRef} from 'react';
 import {
   Keyboard,
   KeyboardAvoidingView,
@@ -25,9 +25,9 @@ const SignUp = ({navigation}) => {
   const [emailInput, setEmailInput] = useState('');
   const [passwordInput, setPasswordInput] = useState('');
 
-  const nameRef = createRef();
-  const emailRef = createRef();
-  const passwordRef = createRef();
+  const nameRef = useRef();
+  const emailRef = useRef();
+  const passwordRef = useRef();
 
   const {login} = useAuth();
 
