@@ -1,5 +1,6 @@
 import React from 'react';
 import {ActivityIndicator, View, StyleSheet} from 'react-native';
+import {COLORS} from '../../theme/Color';
 
 const Splash = () => {
   return (
@@ -15,6 +16,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#06bcee',
+    backgroundColor: COLORS.primary,
   },
 });
